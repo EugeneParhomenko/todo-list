@@ -3,22 +3,22 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthComponent } from './auth/auth.component';
-import { ListComponent } from './list/list.component';
-import { ItemComponent } from './list/item/item.component';
-import { AddComponent } from './list/add/add.component';
+import { TodoListComponent } from './todo-list/todo-list.component';
+import { TodoListItemComponent } from './todo-list/todo-list-item/todo-list-item.component';
+import { TodoListAddComponent } from './todo-list/todo-list-add/todo-list-add.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent,
-    ListComponent,
-    ItemComponent,
-    AddComponent
+    TodoListComponent,
+    TodoListItemComponent,
+    TodoListAddComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

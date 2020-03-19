@@ -1,0 +1,10 @@
+<p>todo-list works!</p>
+<div class="container">
+    <div 
+        *ngFor="let l of toDoList"
+        [ngClass]="(l.isOpen)?'row openList':'row closedList'"
+    >
+        <div class="col-md-12 list-title">{{ l.title }}</div>
+        <div class="col-md-12 list-desc">{{ l.desc }}</div>
+    </div>
+</div>
