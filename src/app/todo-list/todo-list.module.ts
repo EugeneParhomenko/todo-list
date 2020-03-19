@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
         CommonModule
     ],
     declarations: [
-        TodoListComponent,
         TodoListItemComponent,
         TodoListAddComponent
     ],
