@@ -4,7 +4,17 @@
         *ngFor="let l of toDoList"
         [ngClass]="(l.isOpen)?'row openList':'row closedList'"
     >
-        <div class="col-md-12 list-title">{{ l.title }}</div>
-        <div class="col-md-12 list-desc">{{ l.desc }}</div>
+        <div class="col-md-9 list-title">
+            {{ l.title }}
+        </div>
+        <div class="col-md-3 list-btn">
+            <button 
+                [ngClass]="(l.isOpen)?'taskOpen':'taskClose'"
+                (click)="toggleTask(l.id)"
+                data-id="{{ l.id }}"
+            >
+                {{ (l.isOpen)?'Закрыть задачу':'Открыть задачу' }}
+            </button>
+        </div>
     </div>
 </div>

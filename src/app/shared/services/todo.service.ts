@@ -19,4 +19,12 @@ export class ToDoService {
         return this.http.get(this.getUrl('todolist'));
     }
 
+    get(url: string = '') {
+        return this.http.get(this.getUrl(url));
+    }
+
+    put(url: string = '', data: any = {}) {
+        return this.http.put(this.getUrl(url), data);
+    }
+
 }

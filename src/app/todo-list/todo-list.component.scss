@@ -1,0 +1,64 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: normal;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 30px;
+
+    .col-md-9 {
+        flex-basis: 75%;
+    }
+    .col-md-3 {
+        flex-basis: 25%;
+    }
+    .list-title {
+        font-size: 20px;
+    }
+}
+
+.list-btn {
+    button {
+        display: flex;
+        width: 150px;
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+        font-size: 11px;
+        text-transform: uppercase;
+        font-weight: 600;
+        background: transparent;
+        color: #fff;
+        border-radius: 5px;
+        border: 0px !important;
+        outline: none !important;
+        box-shadow: 0 0 20px -10px transparent;
+        transition: all 0.3s ease;;
+    }
+    button.taskOpen {
+        background: #4CAF50;
+        box-shadow: 0 0 20px -10px #009688;
+    }
+    button.taskClose {
+        background: #FF5722;
+        box-shadow: 0 0 20px -10px #E91E63;
+    }
+}
+
+.openList {
+    color: #607D8B;
+}
+.closedList {
+    color: #c9c9c9;
+}
+.closedList {
+    .list-title {
+        text-decoration: line-through;
+    }
+}

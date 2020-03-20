@@ -17,12 +17,22 @@ export class TodoListComponent implements OnInit {
     private toDoService: ToDoService
   ) { }
   
+  toggleTask(listID: number) {
+    let newIsOpen:boolean;
+    let currentTask = this.toDoService.get(`todolist/${listID}`);
+    newIsOpen = currentTask["isOpen"];
+    if(newIsOpen) {
+      this.toDoService.put(`todolist/${listID}`, 'false'); 
+    } else {
+      this.toDoService.put(`todolist/${listID}`, 'true');
+    }
+  }
   
   ngOnInit() {
     this.s1 = this.toDoService.getToDoList()
       .subscribe((toDoList: ToDoList[]) => {
         this.toDoList = toDoList;
-      })
+      });
   }
 
   ngOnDestroy() {
