@@ -23,7 +23,7 @@ export class ToDoService {
         return this.http.get(this.getUrl(url));
     }
 
-    put(url: string = '', data: any = {}) {
+    put(url: string, data: ToDoList) {
         return this.http.put(this.getUrl(url), data);
     }
 

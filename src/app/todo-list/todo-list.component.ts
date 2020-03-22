@@ -3,12 +3,25 @@ import { ToDoList } from '../shared/models/todo.model';
 import { ToDoService } from '../shared/services/todo.service';
 import { Subscription } from 'rxjs';
 
+import { faTasks } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faRedo } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
+
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss']
 })
 export class TodoListComponent implements OnInit {
+
+  // Font Awesome Library
+  faTasks = faTasks;
+  faCheck = faCheck;
+  faRedo = faRedo;
+  faTrash = faTrash;
+
 
   s1: Subscription;
   toDoList: ToDoList[] = [];
@@ -17,22 +30,25 @@ export class TodoListComponent implements OnInit {
     private toDoService: ToDoService
   ) { }
   
-  toggleTask(listID: number) {
-    let newIsOpen:boolean;
-    let currentTask = this.toDoService.get(`todolist/${listID}`);
-    newIsOpen = currentTask["isOpen"];
-    if(newIsOpen) {
-      this.toDoService.put(`todolist/${listID}`, 'false'); 
-    } else {
-      this.toDoService.put(`todolist/${listID}`, 'true');
-    }
+  ngOnInit(){
+    this.getTodoList();
   }
-  
-  ngOnInit() {
-    this.s1 = this.toDoService.getToDoList()
-      .subscribe((toDoList: ToDoList[]) => {
-        this.toDoList = toDoList;
+
+  toggleTask(listID: number){
+    this.toDoService.get(`todolist/${listID}`).subscribe((currentTask: ToDoList) => {
+      currentTask.isOpen = !currentTask.isOpen;
+      this.toDoService.put(`todolist/${listID}`, currentTask).subscribe(() => {
+        this.getTodoList();
       });
+    })
+  }
+
+
+  getTodoList(){
+    this.s1 = this.toDoService.getToDoList()
+    .subscribe((toDoList: ToDoList[]) => {
+      this.toDoList = toDoList;
+    });
   }
 
   ngOnDestroy() {

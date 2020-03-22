@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TodoListModule } from './todo-list/todo-list.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { TodoListModule } from './todo-list/todo-list.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    TodoListModule
+    TodoListModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
