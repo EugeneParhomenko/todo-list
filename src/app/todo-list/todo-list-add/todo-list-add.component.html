@@ -1,1 +1,55 @@
-<p>todo-list-add works!</p>
+<div class="card-hover-shadow-2x mb-3 card">
+    <div class="card-header-tab card-header">
+        <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><fa-icon [icon]="faTasks"></fa-icon>&nbsp;Создать задачу:</div>
+    </div>
+    <div class="scroll-area-sm">
+        <div class="ps-show-limits">
+            <div style="position: static;" class="ps ps--active-y">
+                <div class="ps-content">
+                    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+                        <div class="form-group list-group-item">
+                            <label class="control-label" for="taskTitle">Название задачи</label>
+                            <input 
+                                type="text"
+                                id="taskTitle"
+                                name="taskTitle"
+                                class="form-control"
+                                [ngModel]=" "
+                                #taskTitle="ngModel"
+                                required
+                            >
+                            <span 
+                                class="form-help-text"
+                                *ngIf="taskTitle.invalid && taskTitle.touched"
+                            >
+                                Поле обязательно для заполнения
+                            </span>
+                        </div>
+                        <div class="form-group list-group-item">
+                            <label class="control-label" for="taskText">Описание задачи</label>
+                            <textarea 
+                                type="text"
+                                id="taskText"
+                                name="taskText"
+                                class="form-control"
+                                rows="3"
+                                [ngModel]=" "
+                                #taskText="ngModel"
+                            ></textarea>
+                        </div>
+                        <div class="list-group-item">
+                            <button 
+                                type="submit" 
+                                class="btn btn-primary"
+                                [disabled]="f.invalid"
+                            >Добавить</button>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

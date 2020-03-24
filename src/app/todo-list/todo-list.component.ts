@@ -3,6 +3,7 @@ import { ToDoList } from '../shared/models/todo.model';
 import { ToDoService } from '../shared/services/todo.service';
 import { Subscription } from 'rxjs';
 
+  // Font Awesome Library
 import { faTasks } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faRedo } from '@fortawesome/free-solid-svg-icons';
@@ -31,20 +32,20 @@ export class TodoListComponent implements OnInit {
   ) { }
   
   ngOnInit(){
-    this.getTodoList();
+    this.renderTodoList();
   }
 
   toggleTask(listID: number){
     this.toDoService.get(`todolist/${listID}`).subscribe((currentTask: ToDoList) => {
       currentTask.isOpen = !currentTask.isOpen;
       this.toDoService.put(`todolist/${listID}`, currentTask).subscribe(() => {
-        this.getTodoList();
+        this.renderTodoList();
       });
     })
   }
 
 
-  getTodoList(){
+  renderTodoList(){
     this.s1 = this.toDoService.getToDoList()
     .subscribe((toDoList: ToDoList[]) => {
       this.toDoList = toDoList;
