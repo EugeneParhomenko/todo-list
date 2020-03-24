@@ -52,6 +52,16 @@ export class TodoListComponent implements OnInit {
     });
   }
 
+  deleteToDoListItem(listID:number) {
+    this.toDoService.delete(`todolist/${listID}`).subscribe(
+      ()=>{
+        console.log(`Employee with Id = ${listID}deleted`);
+        this.renderTodoList();
+      },
+      (err) => console.log(err)
+    );
+  }
+
   ngOnDestroy() {
     if(this.s1) {
       this.s1.unsubscribe();

@@ -34,6 +34,10 @@ export class ToDoService {
         return this.http.post(this.getUrl(url), data);
     }
 
+    delete(url: string = ''): Observable<any> {
+        return this.http.delete(this.getUrl(url));
+    }
+
     private getUrl(url: string = ''):string {
         return this.serverUrl + url;
     }
