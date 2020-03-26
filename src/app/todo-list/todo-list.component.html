@@ -31,7 +31,7 @@
                                                 </div>
                                             </div>
                                             <div class="widget-content-left">
-                                                <div [ngClass]="(l.isOpen)?'widget-heading':'widget-heading closedTitle'">
+                                                <div [ngClass]="(l.isOpen)?'widget-heading':'widget-heading closedTitle'" >
                                                     {{ l.title }}
                                                 </div>
                                                 <div class="widget-subheading">
@@ -61,6 +61,9 @@
                                                 </button>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="widget-content-desc" >
+                                        {{ l.desc }}
                                     </div>
                                 </li>
                                
