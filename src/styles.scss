@@ -162,6 +162,11 @@ i {
     font-size: 14px;
 }
 
+.widget-content-left .widget-content-left {
+    flex-basis: 83%;
+    max-width: 83%;
+}
+
 .list-group {
     display: flex;
     flex-direction: column;
@@ -169,15 +174,30 @@ i {
     margin-bottom: 0
 }
 
+.widget-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
 .todo-indicator {
-    position: absolute;
-    width: 4px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 0.3rem;
-    left: 0.625rem;
-    top: 20%;
-    opacity: .6;
-    transition: opacity .2s
+    margin-right: 6px;
+    opacity: 0.7;
+    -webkit-transition: opacity 0.2s;
+    transition: opacity 0.2s;
+    span {
+        font-size: 13px;
+        line-height: 1;
+        font-weight: 500;
+        color: #ffff;
+    }
 }
 
 .bg-warning {
@@ -194,7 +214,7 @@ i {
     display: flex;
     flex: 1;
     position: relative;
-    align-items: center
+    align-items: flex-start;
 }
 
 .widget-content .widget-content-right.widget-content-actions {

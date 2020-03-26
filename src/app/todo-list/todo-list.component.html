@@ -21,7 +21,6 @@
                                     class="list-group-item"
                                     *ngFor="let l of toDoList"
                                 >
-                                    <div [ngClass]="(l.isOpen)?'todo-indicator bg-primary':'todo-indicator bg-success'"></div>
                                     <div class="widget-content p-0">
                                         <div class="widget-content-wrapper">
                                             <div class="widget-content-left mr-2">
@@ -31,11 +30,14 @@
                                                 </div>
                                             </div>
                                             <div class="widget-content-left">
-                                                <div [ngClass]="(l.isOpen)?'widget-heading':'widget-heading closedTitle'" >
+                                                <div [ngClass]="(l.isOpen)?'widget-heading':'widget-heading closedTitle'" (click)="toggleDesc(i)">
+                                                    <div [ngClass]="(l.isOpen)?'todo-indicator bg-primary':'todo-indicator bg-success'">
+                                                        <span>{{ l.rate }}</span>
+                                                    </div>
                                                     {{ l.title }}
                                                 </div>
                                                 <div class="widget-subheading">
-                                                    <i>20.03.2020</i>
+                                                    <i>{{ l.date | wfmMoment: 'YYYY-MM-DD' }}</i>
                                                 </div>
                                             </div>
                                             <div class="widget-content-right"> 
@@ -62,7 +64,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="widget-content-desc" >
+                                    <div *ngIf="toggled && toggled[i]" class="widget-content-desc" >
                                         {{ l.desc }}
                                     </div>
                                 </li>

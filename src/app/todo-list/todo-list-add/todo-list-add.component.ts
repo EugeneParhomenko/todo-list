@@ -27,14 +27,16 @@ export class TodoListAddComponent implements OnInit, OnDestroy {
   ) { }
 
   onSubmit(form: NgForm) {
-    let {taskTitle, taskText} = form.value;
-    const task = new ToDoList(taskTitle, taskText, true);
+    let {taskTitle, taskText, taskRate} = form.value;
+    let date = new Date;
+    const task = new ToDoList(taskTitle, taskText, taskRate, date, true);
 
     this.sub1 = this.toDoService.addToDoList(task)
       .subscribe(() => {
         form.setValue({
           taskTitle: '',
-          taskText: ' '
+          taskText: '',
+          taskRate: 1
         });
         this.renderTodoList.emit();
       });

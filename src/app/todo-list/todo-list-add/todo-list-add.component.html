@@ -26,6 +26,23 @@
                             </span>
                         </div>
                         <div class="form-group list-group-item">
+                            <label class="control-label" for="taskRate">Выберите категорию</label>
+                            <select 
+                                class="form-control" 
+                                id="taskRate"
+                                required
+                                [ngModel]="1"
+                                name="taskRate"
+                            >
+                                <option 
+                                    *ngFor="let r of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+                                    [value]="r"
+                                >
+                                    {{ r }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group list-group-item">
                             <label class="control-label" for="taskText">Описание задачи</label>
                             <textarea 
                                 type="text"

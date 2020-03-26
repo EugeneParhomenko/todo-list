@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToDoList } from '../shared/models/todo.model';
 import { ToDoService } from '../shared/services/todo.service';
 import { Subscription } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
   // Font Awesome Library
 import { faTasks } from '@fortawesome/free-solid-svg-icons';
@@ -44,6 +45,10 @@ export class TodoListComponent implements OnInit {
     })
   }
 
+  toggled = new Array<boolean>(this.toDoList.length);
+  toggleDesc(index: number) {
+    this.toggled[index] = !this.toggled[index];
+  }
 
   renderTodoList(){
     this.s1 = this.toDoService.getToDoList()
