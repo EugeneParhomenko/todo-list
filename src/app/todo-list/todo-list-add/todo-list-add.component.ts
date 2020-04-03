@@ -16,6 +16,7 @@ import { faTasks } from '@fortawesome/free-solid-svg-icons';
 export class TodoListAddComponent implements OnInit, OnDestroy {
   
 @Output() renderTodoList = new EventEmitter<any>();
+@Output() toggleShowTodoAdd = new EventEmitter<any>();
 
   sub1: Subscription;
 
@@ -26,7 +27,7 @@ export class TodoListAddComponent implements OnInit, OnDestroy {
     private toDoService: ToDoService
   ) { }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm){
     let {taskTitle, taskText, taskRate} = form.value;
     let date = new Date;
     const task = new ToDoList(taskTitle, taskText, taskRate, date, true);
@@ -42,8 +43,13 @@ export class TodoListAddComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnInit() {
+  ngOnInit(){
   }
+
+  closeTodoAdd(){
+    this.toggleShowTodoAdd.emit();
+  }
+
 
   ngOnDestroy() {
     if(this.sub1) this.sub1.unsubscribe();

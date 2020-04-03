@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ToDoList } from '../shared/models/todo.model';
 import { ToDoService } from '../shared/services/todo.service';
 import { Subscription } from 'rxjs';
-import { DatePipe } from '@angular/common';
 
   // Font Awesome Library
 import { faTasks } from '@fortawesome/free-solid-svg-icons';
@@ -27,6 +26,9 @@ export class TodoListComponent implements OnInit {
 
   s1: Subscription;
   toDoList: ToDoList[] = [];
+  showTodoAdd:boolean = false;
+  showTodoItem:boolean = false;
+  showTodoItemID:number;
 
   constructor(
     private toDoService: ToDoService
@@ -45,10 +47,20 @@ export class TodoListComponent implements OnInit {
     })
   }
 
-  toggled = new Array<boolean>(this.toDoList.length);
-  toggleDesc(index: number) {
-    this.toggled[index] = !this.toggled[index];
+  toggleShowTodoAdd(){
+    this.showTodoAdd = !this.showTodoAdd;
   }
+
+  toggleShowTodoItem(listID: number){
+    this.showTodoItemID = listID;
+    this.showTodoItem = !this.showTodoItem;
+  }
+
+  // toggled = new Array<boolean>(this.toDoList.length);
+  // toggleDesc(index: number) {
+  //   this.toggled[index] = !this.toggled[index];
+  //   console.log(this.toggled);
+  // }
 
   renderTodoList(){
     this.s1 = this.toDoService.getToDoList()
@@ -60,7 +72,7 @@ export class TodoListComponent implements OnInit {
   deleteToDoListItem(listID:number) {
     this.toDoService.delete(`todolist/${listID}`).subscribe(
       ()=>{
-        console.log(`Employee with Id = ${listID}deleted`);
+        console.log(`${listID} deleted`);
         this.renderTodoList();
       },
       (err) => console.log(err)

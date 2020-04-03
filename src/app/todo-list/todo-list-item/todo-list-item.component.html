@@ -1,1 +1,128 @@
-<p>todo-list-item works!</p>
+<div class="modal addTodo-modal todoItem">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Просмотр задачи</h4>
+          <div class="widget-content-right" *ngIf="!isChangeTask"> 
+            <button 
+                *ngIf="toDoListItem.isOpen"
+                class="border-0 btn-transition btn btn-outline-success"
+                (click)="toggleTaskItem(toDoListItem.id);"
+            >
+                <fa-icon [icon]="faCheck"></fa-icon> Закрыть
+            </button>
+            <button 
+                *ngIf="!toDoListItem.isOpen"
+                class="border-0 btn-transition btn btn-outline-warning"
+                (click)="toggleTaskItem(toDoListItem.id);"
+            >
+                <fa-icon [icon]="faRedo" *ngIf="!toDoListItem.isOpen"></fa-icon> Открыть заново
+            </button>
+        </div>
+          <button 
+            type="button" 
+            class="close" 
+            (click)="closeTodoItem()"
+          >
+            <span>×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <!-- <form 
+                *ngIf="isChangeTask"
+                #f="ngForm" 
+                (ngSubmit)="onSubmit(f)"
+            >
+                <div class="form-group list-group-item">
+                    <label class="control-label" for="taskTitle">Название задачи</label>
+                    <input 
+                        type="text"
+                        id="taskTitle"
+                        name="taskTitle"
+                        class="form-control"
+                        [ngModel]="toDoListItem.title"
+                        #taskTitle="ngModel"
+                        required
+                    >
+                    <span 
+                        class="form-help-text"
+                        *ngIf="taskTitle.invalid && taskTitle.touched"
+                    >
+                        Поле обязательно для заполнения
+                    </span>
+                </div>
+                <div class="form-group list-group-item">
+                    <label class="control-label" for="taskRate">Выберите приоритет</label>
+                    <select 
+                        class="form-control" 
+                        id="taskRate"
+                        required
+                        [ngModel]="toDoListItem.rate"
+                        name="taskRate"
+                    >
+                        <option 
+                            *ngFor="let r of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+                            [value]="r"
+                        >
+                            {{ r }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group list-group-item">
+                    <label class="control-label" for="taskText">Описание задачи</label>
+                    <textarea 
+                        type="text"
+                        id="taskText"
+                        name="taskText"
+                        class="form-control"
+                        rows="3"
+                        [ngModel]="toDoListItem.desc"
+                        #taskText="ngModel"
+                    ></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="closeTodoAdd()">Отмена</button>
+                    <button 
+                        type="submit" 
+                        class="btn btn-primary"
+                        [disabled]="f.invalid"
+                    >Подтвердить</button>
+                </div>
+            </form> -->
+            <div 
+                *ngIf="!isChangeTask"
+                class="widget-content p-0"
+            >
+                <div class="widget-content-wrapper">
+                    
+                    <div class="widget-content-left">
+                        <div [ngClass]="(toDoListItem.isOpen)?'widget-heading':'widget-heading closedTitle'">
+                            <div [ngClass]="(toDoListItem.isOpen)?'todo-indicator bg-primary':'todo-indicator bg-success'">
+                                <span>{{ toDoListItem.rate }}</span>
+                            </div>
+                            {{ toDoListItem.title }}
+                        </div>
+                        <div class="widget-subheading">
+                            <i>{{ toDoListItem.date | wfmMoment: 'YYYY-MM-DD' }}</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-secondary" 
+                    (click)="deleteToDoListItem(toDoListItem.id)"
+                >Удалить</button>
+                <button 
+                    type="submit" 
+                    class="btn btn-primary"
+                >Редактировать</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+

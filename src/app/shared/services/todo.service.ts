@@ -12,7 +12,7 @@ export class ToDoService {
     }
 
     
-    getToDoList() {
+    getToDoList(){
         return this.http.get(this.getUrl('todolist'));
     }
 
@@ -20,13 +20,17 @@ export class ToDoService {
         return this.post('todolist', toDoList)
     }
 
+    getToDoListItem(listID:number){
+        return this.http.get(this.getUrl(`todolist/${listID}`));
+    }
 
 
-    get(url: string = '') {
+
+    get(url: string = ''){
         return this.http.get(this.getUrl(url));
     }
 
-    put(url: string, data: ToDoList) {
+    put(url: string, data: ToDoList){
         return this.http.put(this.getUrl(url), data);
     }
 
