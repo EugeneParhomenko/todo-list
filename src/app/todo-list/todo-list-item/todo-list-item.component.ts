@@ -28,6 +28,7 @@ export class TodoListItemComponent implements OnInit, OnDestroy {
   faTrash = faTrash;
 
   isChangeTask:boolean = false;
+  isTaskLoad:boolean = false;
   s1:Subscription;
   toDoListItem:ToDoList;
 
@@ -39,6 +40,7 @@ export class TodoListItemComponent implements OnInit, OnDestroy {
     this.s1 = this.toDoService.getToDoListItem(listID)
     .subscribe((toDoListItem: ToDoList) => {
       this.toDoListItem = toDoListItem;
+      this.isTaskLoad = true;
       console.log(this.toDoListItem);
     });
   }
@@ -47,8 +49,8 @@ export class TodoListItemComponent implements OnInit, OnDestroy {
     this.toggleShowTodoItem.emit();
   }
 
-  toggleTaskItem(){
-    this.toggleTask.emit();
+  toggleTaskItem(taskID:number){
+    this.toggleTask.emit(taskID);
   }
 
   onSubmit(form: NgForm){

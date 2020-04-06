@@ -283,3 +283,8 @@ i {
     background: rgba(0, 0, 0, 0.5);
 }
 
+.modal.addTodo-modal.todoItem {
+    .modal-dialog {
+        max-width: 800px;
+    }
+}
