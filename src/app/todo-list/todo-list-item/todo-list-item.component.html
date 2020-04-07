@@ -5,33 +5,26 @@
           <h4 class="modal-title">Просмотр задачи</h4>
           <div class="widget-content-right" *ngIf="!isChangeTask"> 
             <button 
-                *ngIf="toDoListItem.isOpen"
-                class="border-0 btn-transition btn btn-outline-success"
+                [ngClass]="(isOpen)?'border-0 btn-transition btn btn-outline-success':'border-0 btn-transition btn btn-outline-warning'"
                 (click)="toggleTaskItem(toDoListItem.id);"
             >
-                <fa-icon [icon]="faCheck"></fa-icon> Закрыть
+                <fa-icon [icon]="faCheck"></fa-icon> {{btnText}}
             </button>
             <button 
-                *ngIf="!toDoListItem.isOpen"
-                class="border-0 btn-transition btn btn-outline-warning"
-                (click)="toggleTaskItem(toDoListItem.id);"
+                type="button" 
+                class="close" 
+                (click)="closeTodoItem()"
             >
-                <fa-icon [icon]="faRedo" *ngIf="!toDoListItem.isOpen"></fa-icon> Открыть заново
+                <span>×</span>
             </button>
-        </div>
-          <button 
-            type="button" 
-            class="close" 
-            (click)="closeTodoItem()"
-          >
-            <span>×</span>
-          </button>
+          </div>
         </div>
         <div class="modal-body">
             <!-- <form 
                 *ngIf="isChangeTask"
                 #f="ngForm" 
                 (ngSubmit)="onSubmit(f)"
+                class="widget-content p-0"
             >
                 <div class="form-group list-group-item">
                     <label class="control-label" for="taskTitle">Название задачи</label>
@@ -81,7 +74,11 @@
                     ></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" (click)="closeTodoAdd()">Отмена</button>
+                    <button t
+                        ype="button" 
+                        class="btn btn-secondary" 
+                        (click)="toggleTaskChange()"
+                    >Отмена</button>
                     <button 
                         type="submit" 
                         class="btn btn-primary"
@@ -96,8 +93,8 @@
                 <div class="widget-content-wrapper">
                     
                     <div class="widget-content-left">
-                        <div [ngClass]="(toDoListItem.isOpen)?'widget-heading':'widget-heading closedTitle'">
-                            <div [ngClass]="(toDoListItem.isOpen)?'todo-indicator bg-primary':'todo-indicator bg-success'">
+                        <div [ngClass]="(isOpen)?'widget-heading':'widget-heading closedTitle'">
+                            <div [ngClass]="(isOpen)?'todo-indicator bg-primary':'todo-indicator bg-success'">
                                 <span>{{ toDoListItem.rate }}</span>
                             </div>
                             {{ toDoListItem.title }}
@@ -107,18 +104,25 @@
                         </div>
                     </div>
                 </div>
+                <div class="widget-content-wrapper">
+                    <div class="task-description">
+                        {{ toDoListItem.desc }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button 
+                        type="button" 
+                        class="btn btn-secondary" 
+                        (click)="deleteTodoItem(toDoListItem.id)"
+                    >Удалить</button>
+                    <button 
+                        type="submit" 
+                        class="btn btn-primary"
+                        (click)="toggleTaskChange()"
+                    >Редактировать</button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button 
-                    type="button" 
-                    class="btn btn-secondary" 
-                    (click)="deleteToDoListItem(toDoListItem.id)"
-                >Удалить</button>
-                <button 
-                    type="submit" 
-                    class="btn btn-primary"
-                >Редактировать</button>
-            </div>
+            
         </div>
       </div>
     </div>

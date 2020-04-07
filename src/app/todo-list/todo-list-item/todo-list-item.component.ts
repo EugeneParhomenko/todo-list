@@ -20,6 +20,7 @@ export class TodoListItemComponent implements OnInit, OnDestroy {
   @Input() showTodoItemID:number;
   @Output() toggleShowTodoItem = new EventEmitter<any>();
   @Output() toggleTask = new EventEmitter<any>();
+  @Output() deleteToDoListItem = new EventEmitter<any>();
 
   // Font Awesome Library
   faTasks = faTasks;
@@ -31,6 +32,9 @@ export class TodoListItemComponent implements OnInit, OnDestroy {
   isTaskLoad:boolean = false;
   s1:Subscription;
   toDoListItem:ToDoList;
+  private btnText: string = '';
+
+  private isOpen: boolean;
 
   constructor(
     private toDoService: ToDoService
@@ -41,15 +45,28 @@ export class TodoListItemComponent implements OnInit, OnDestroy {
     .subscribe((toDoListItem: ToDoList) => {
       this.toDoListItem = toDoListItem;
       this.isTaskLoad = true;
-      console.log(this.toDoListItem);
+      this.isOpen = toDoListItem.isOpen;
+      this.btnText = this.isOpen ? 'Закрыть' : 'Открыть заново';
+
     });
+  }
+
+  deleteTodoItem(taskID:number) {
+    this.deleteToDoListItem.emit(taskID);
+    this.closeTodoItem();
   }
 
   closeTodoItem(){
     this.toggleShowTodoItem.emit();
   }
 
+  toggleTaskChange(){
+    this.isChangeTask = !this.isChangeTask;
+  }
+
   toggleTaskItem(taskID:number){
+    this.isOpen = !this.isOpen;
+    this.btnText = this.isOpen ? 'Закрыть' : 'Открыть заново'
     this.toggleTask.emit(taskID);
   }
 

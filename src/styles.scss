@@ -288,3 +288,25 @@ i {
         max-width: 800px;
     }
 }
+
+.modal-content {
+    .widget-heading {
+        font-size: 20px;
+        line-height: 28px;
+    }
+    .todo-indicator {
+        width: 28px;
+        height: 28px;
+    }
+    .widget-subheading {
+        color: #858a8e;
+        font-size: 10px;
+        margin: 4px 0px 0px 35px;
+    }
+    .task-description {
+        margin: 30px 0 20px;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+}
+
