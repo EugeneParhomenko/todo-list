@@ -2,9 +2,13 @@
     <div class="modal-dialog">
       <div class="modal-content" *ngIf="isTaskLoad">
         <div class="modal-header">
-          <h4 class="modal-title">Просмотр задачи</h4>
-          <div class="widget-content-right" *ngIf="!isChangeTask"> 
+          <h4 class="modal-title">
+            <span *ngIf="!isChangeTask">Просмотр задачи</span>
+            <span *ngIf="isChangeTask">Редактирование задачи</span>
+          </h4>
+          <div class="widget-content-right"> 
             <button 
+                *ngIf="!isChangeTask"
                 [ngClass]="(isOpen)?'border-0 btn-transition btn btn-outline-success':'border-0 btn-transition btn btn-outline-warning'"
                 (click)="toggleTaskItem(toDoListItem.id);"
             >
@@ -20,59 +24,69 @@
           </div>
         </div>
         <div class="modal-body">
-            <!-- <form 
-                *ngIf="isChangeTask"
+            <form 
+                *ngIf="isChangeTask && isOpen"
                 #f="ngForm" 
                 (ngSubmit)="onSubmit(f)"
                 class="widget-content p-0"
             >
-                <div class="form-group list-group-item">
-                    <label class="control-label" for="taskTitle">Название задачи</label>
-                    <input 
-                        type="text"
-                        id="taskTitle"
-                        name="taskTitle"
-                        class="form-control"
-                        [ngModel]="toDoListItem.title"
-                        #taskTitle="ngModel"
-                        required
-                    >
-                    <span 
-                        class="form-help-text"
-                        *ngIf="taskTitle.invalid && taskTitle.touched"
-                    >
-                        Поле обязательно для заполнения
-                    </span>
+                <div class="widget-content-wrapper">
+                        
+                    <div class="widget-content-left">
+                        <div [ngClass]="(isOpen)?'widget-heading':'widget-heading closedTitle'">
+                            <div [ngClass]="(isOpen)?'todo-indicator bg-primary':'todo-indicator bg-success'">
+                                <span>
+                                    <select 
+                                        class="form-control" 
+                                        id="taskRate"
+                                        required
+                                        [ngModel]="toDoListItem.rate"
+                                        name="taskRate"
+                                    >
+                                        <option 
+                                            *ngFor="let r of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+                                            [value]="r"
+                                        >
+                                            {{ r }}
+                                        </option>
+                                    </select>
+                                </span>
+                            </div>
+                            <input 
+                                type="text"
+                                id="taskTitle"
+                                name="taskTitle"
+                                class="form-control"
+                                [ngModel]="toDoListItem.title"
+                                #taskTitle="ngModel"
+                                required
+                            >
+                        </div>
+                        <div class="widget-subheading">
+                            <i>{{ toDoListItem.date | wfmMoment: 'YYYY-MM-DD' }}</i> 
+                            <span 
+                                class="form-help-text"
+                                *ngIf="taskTitle.invalid && taskTitle.touched"
+                            >
+                            Поле обязательно для заполнения
+                        </span>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group list-group-item">
-                    <label class="control-label" for="taskRate">Выберите приоритет</label>
-                    <select 
-                        class="form-control" 
-                        id="taskRate"
-                        required
-                        [ngModel]="toDoListItem.rate"
-                        name="taskRate"
-                    >
-                        <option 
-                            *ngFor="let r of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
-                            [value]="r"
-                        >
-                            {{ r }}
-                        </option>
-                    </select>
+                <div class="widget-content-wrapper">
+                    <div class="task-description">
+                        <textarea 
+                            type="text"
+                            id="taskText"
+                            name="taskText"
+                            class="form-control"
+                            rows="3"
+                            [ngModel]="toDoListItem.desc"
+                            #taskText="ngModel"
+                        ></textarea>
+                    </div>
                 </div>
-                <div class="form-group list-group-item">
-                    <label class="control-label" for="taskText">Описание задачи</label>
-                    <textarea 
-                        type="text"
-                        id="taskText"
-                        name="taskText"
-                        class="form-control"
-                        rows="3"
-                        [ngModel]="toDoListItem.desc"
-                        #taskText="ngModel"
-                    ></textarea>
-                </div>
+
                 <div class="modal-footer">
                     <button t
                         ype="button" 
@@ -85,7 +99,7 @@
                         [disabled]="f.invalid"
                     >Подтвердить</button>
                 </div>
-            </form> -->
+            </form>
             <div 
                 *ngIf="!isChangeTask"
                 class="widget-content p-0"

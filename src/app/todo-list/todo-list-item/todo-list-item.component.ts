@@ -31,6 +31,7 @@ export class TodoListItemComponent implements OnInit, OnDestroy {
   isChangeTask:boolean = false;
   isTaskLoad:boolean = false;
   s1:Subscription;
+  s2:Subscription;
   toDoListItem:ToDoList;
   private btnText: string = '';
 
@@ -58,6 +59,7 @@ export class TodoListItemComponent implements OnInit, OnDestroy {
 
   closeTodoItem(){
     this.toggleShowTodoItem.emit();
+    this.isChangeTask = false;
   }
 
   toggleTaskChange(){
@@ -71,7 +73,14 @@ export class TodoListItemComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm){
-    console.log(form);
+    let {taskTitle, taskText, taskRate} = form.value;
+    const task = new ToDoList(taskTitle, taskText, taskRate, this.toDoListItem.date, true, this.toDoListItem.id);
+
+    this.s2 = this.toDoService.updateToDoList(task)
+      .subscribe(() => {
+        this.renderTodoListItem(this.showTodoItemID);
+        this.isChangeTask = false;
+      });
   }
 
   ngOnInit() {
@@ -81,6 +90,9 @@ export class TodoListItemComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if(this.s1) {
       this.s1.unsubscribe();
+    }
+    if(this.s2) {
+      this.s2.unsubscribe();
     }
   }
 

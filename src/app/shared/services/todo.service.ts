@@ -20,6 +20,10 @@ export class ToDoService {
         return this.post('todolist', toDoList)
     }
 
+    updateToDoList(toDoList: ToDoList):Observable<any> {
+        return this.put(`todolist/${toDoList.id}`, toDoList)
+    }
+
     getToDoListItem(listID:number){
         return this.http.get(this.getUrl(`todolist/${listID}`));
     }
@@ -30,7 +34,7 @@ export class ToDoService {
         return this.http.get(this.getUrl(url));
     }
 
-    put(url: string, data: ToDoList){
+    put(url: string, data: any = {}): Observable<any>{
         return this.http.put(this.getUrl(url), data);
     }
 
@@ -45,5 +49,6 @@ export class ToDoService {
     private getUrl(url: string = ''):string {
         return this.serverUrl + url;
     }
+    
 
 }
